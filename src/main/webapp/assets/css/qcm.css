@@ -1,0 +1,62 @@
+@charset "UTF-8";
+.form-container {
+    width: 400px;
+    margin: auto;
+    margin-top: 50px;
+    background: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+}
+
+button {
+    padding: 10px;
+    width: 100%;
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/*Liste*/
+
+table {
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #3498db;
+    color: white;
+}
+
+.btn {
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.edit {
+    background: #f39c12;
+}
+
+.delete {
+    background: #e74c3c;
+}
+
+.add {
+    background: #2ecc71;
+}
