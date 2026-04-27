@@ -48,6 +48,36 @@ public class QcmDAO {
         return list;
     }
     
+    // ----------------------------------Supprimer--------------------------------
+    public void delete(int num) throws Exception {
+        Connection conn = utils.connectionDB.getConnection();
+
+        String sql = "DELETE FROM qcm WHERE num_question = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, num);
+
+        ps.executeUpdate();
+    }
+    
+    //update
+    public void update(model.Qcm q) throws Exception {
+        Connection conn = utils.connectionDB.getConnection();
+
+        String sql = "UPDATE qcm SET num_question=?, question=?, reponse1=?, reponse2=?, reponse3=?, reponse4=?, bonne_reponse =? WHERE num_question=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.setInt(1, q.getNum());
+        ps.setString(2, q.getQst());
+        ps.setString(3, q.getR1());
+        ps.setString(4, q.getR2());
+        ps.setString(5, q.getR3());
+        ps.setString(6, q.getR4());
+        ps.setInt(7, q.getBr());
+
+        ps.executeUpdate();
+        
+        
+    }
     // -------------------------Rechercher-----------------------------------------
     public ArrayList<model.Qcm> search(String motCle) throws Exception {
         ArrayList<model.Qcm> list = new ArrayList<>();

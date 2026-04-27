@@ -41,21 +41,21 @@ ArrayList<Qcm> list = (ArrayList<Qcm>) request.getAttribute("liste");
 
 <%
 if (list != null) {
-    for (Qcm e : list) {
+    for (Qcm q : list) {
 %>
 
 <tr>
-    <td><%= e.getNum() %></td>
-    <td><%= e.getQst() %></td>
-    <td><%= e.getR1() %></td>
-    <td><%= e.getR2() %></td>
-    <td><%= e.getR3() %></td>
-    <td><%= e.getR4() %></td>
-    <td><%= e.getBr() %></td>
+    <td><%= q.getNum() %></td>
+    <td><%= q.getQst() %></td>
+    <td><%= q.getR1() %></td>
+    <td><%= q.getR2() %></td>
+    <td><%= q.getR3() %></td>
+    <td><%= q.getR4() %></td>
+    <td><%= q.getBr() %></td>
 
     <td>
-        <a class="btn edit" href="EditQcmServlet?num=<%= e.getNum() %>">✏️</a>
-        <a class="btn delete" href="DeleteQcmServlet?num=<%= e.getNum() %>">🗑</a>
+        <a class="btn edit" href="EditQcmServlet?num_question=<%= q.getNum() %>">✏️</a>
+        <a class="btn delete" href="DeleteQcmServlet?num_question=<%= q.getNum() %>">🗑</a>
     </td>
 </tr>
 
