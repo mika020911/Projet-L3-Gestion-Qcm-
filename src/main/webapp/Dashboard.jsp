@@ -22,7 +22,7 @@
 
     <a href="DashboardServlet">📊 Dashboard</a>
     <a href="ListeEtudiantServlet">👨‍🎓 Étudiants</a>
-    <a href= "GestionQcmServlet">Gestion QCM</a>
+    <a href= "ListeQcmServlet">Gestion QCM</a>
     
 </div>
 

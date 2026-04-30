@@ -78,6 +78,34 @@ public class QcmDAO {
         
         
     }
+    
+    //--------------------------------------- FindById -----------------------------------
+    public model.Qcm findById(int num) throws Exception {
+        model.Qcm q = null;
+
+        Connection conn = utils.connectionDB.getConnection();
+
+        String sql = "SELECT * FROM qcm WHERE num_question = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, num);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            q= new model.Qcm();
+            
+            q.setNum(rs.getInt("num_question"));
+            q.setQst(rs.getString("question"));
+            q.setR1(rs.getString("reponse1"));
+            q.setR2(rs.getString("reponse2"));
+            q.setR3(rs.getString("reponse3"));
+            q.setR4(rs.getString("reponse4"));
+            q.setBr(rs.getInt("bonne_reponse"));
+        }
+
+        return q;
+    }
+    
     // -------------------------Rechercher-----------------------------------------
     public ArrayList<model.Qcm> search(String motCle) throws Exception {
         ArrayList<model.Qcm> list = new ArrayList<>();

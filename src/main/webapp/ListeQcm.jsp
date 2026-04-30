@@ -54,7 +54,7 @@ if (list != null) {
     <td><%= q.getBr() %></td>
 
     <td>
-        <a class="btn edit" href="EditQcmServlet?num_question=<%= q.getNum() %>">✏️</a>
+        <a class="btn edit" href="UpdateQcmServlet?num_question=<%= q.getNum() %>">✏️</a>
         <a class="btn delete" href="DeleteQcmServlet?num_question=<%= q.getNum() %>">🗑</a>
     </td>
 </tr>

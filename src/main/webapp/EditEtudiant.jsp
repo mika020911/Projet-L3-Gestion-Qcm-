@@ -19,6 +19,19 @@ if (e == null) {
 <title>Modifier</title>
 </head>
 <body>
+<%@ page import="model.Etudiant" %>
+
+<%
+Etudiant e = (Etudiant) request.getAttribute("etudiant");
+
+if (e == null) {
+%>
+    <h3 style="color:red;">Erreur : QCM introuvable</h3>
+<%
+    return;
+}
+%>
+
 
 <form action="UpdateEtudiantServlet" method="post">
 
