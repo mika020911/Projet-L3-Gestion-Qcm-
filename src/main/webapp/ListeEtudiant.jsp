@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Etudiant" %>
 
@@ -7,60 +6,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Liste des etudiants</title>
+<title>Liste des étudiants</title>
+
+<link rel="stylesheet" href="assets/css/listE.css">
+
 </head>
+
 <body>
 
-<form action="ListeEtudiantServlet" method = get>
-Recherche:
-<input type="text" name="motCle">
-<input type="submit" name="chercher">
+<div class="container">
+
+<h2>📋 Liste des étudiants</h2>
+
+<form action="ListeEtudiantServlet" method="get">
+    <input type="text" name="motCle" placeholder="Rechercher...">
+    <input type="submit" value="Chercher">
 </form>
 
-<h2>Liste des étudiants</h2>
+<table>
 
-<table border="1">
-    <tr>
-        <th>Num</th>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Niveau</th>
-        <th>Email</th>
-    </tr>
+<tr>
+    <th>Num</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Niveau</th>
+    <th>Email</th>
+    <th>Actions</th>
+</tr>
 
 <%
-	ArrayList<Etudiant> list = (ArrayList<Etudiant>) request.getAttribute("liste");
+ArrayList<Etudiant> list =
+(ArrayList<Etudiant>) request.getAttribute("liste");
 
-if (list != null){
-    for (Etudiant e : list) {
+if(list != null){
+    for(Etudiant e : list){
 %>
 
-    <tr>
-        <td><%= e.getNum() %></td>
-        <td><%= e.getNom() %></td>
-        <td><%= e.getPrenom() %></td>
-        <td><%= e.getNiveau() %></td>
-        <td><%= e.getEmail() %></td>
-            <td>
-        
+<tr>
+    <td><%= e.getNum() %></td>
+    <td><%= e.getNom() %></td>
+    <td><%= e.getPrenom() %></td>
+    <td><%= e.getNiveau() %></td>
+    <td><%= e.getEmail() %></td>
+    <td>
         <a href="DeleteEtudiantServlet?num_etudiant=<%= e.getNum() %>">Supprimer</a>
-
-        
         <a href="UpdateEtudiantServlet?num_etudiant=<%= e.getNum() %>">Modifier</a>
     </td>
-    </tr>
+</tr>
 
-<% }
-} else{
+<%
+    }
+} else {
 %>
 
-<p>Aucun étudiant trouvé</p>
+<tr>
+    <td colspan="6" class="empty">Aucun étudiant trouvé</td>
+</tr>
 
 <%
 }
 %>
 
 </table>
+
+</div>
 
 </body>
 </html>

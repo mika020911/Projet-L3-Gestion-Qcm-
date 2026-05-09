@@ -4,26 +4,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href= "assets/css/Ajouter.css">
 <title>Gestion Etudiant</title>
 </head>
 <body>
-<form action="AddEtudiantServlet" method = "post">
-NumEtud : <input type="text" name= "num"> <br>
-Nom  : <input type= "text" name="nom"><br>
-Prenom : <input type= "text" name= "prenom"> <br>
+<%
+String msg = (String) session.getAttribute("msg");
 
-Niveau : 	
-<select name = "niveau">
-	<option>L1</option>
-	<option>L2</option>
-	<option>L3</option>
-	<option>M1</option>
-	<option>M2</option>
-</select> <br>
+if (msg != null) {
+    session.removeAttribute("msg");
+%>
 
-Email: <input type = "text" name="email">
+<div class="toast <%= msg %>">
+    <%= msg.equals("success") ? " Étudiant ajouté !" : "Erreur lors de l'ajout !" %>
+</div>
+
+<%
+}
+%>
+
+<form action="AddEtudiantServlet" method="post">
+
+<h1>Ajouter Etudiant</h1>
+
+<label>Num Etudiant</label>
+<input type="text" name="num">
+
+<label>Nom</label>
+<input type="text" name="nom">
+
+<label>Prénom</label>
+<input type="text" name="prenom">
+
+<label>Niveau</label>
+<select name="niveau">
+    <option>L1</option>
+    <option>L2</option>
+    <option>L3</option>
+    <option>M1</option>
+    <option>M2</option>
+</select>
+
+<label>Email</label>
+<input type="text" name="email">
+
 <button type="submit">Ajouter</button>
-</form>
 
+</form>
+<a href="ListeEtudiantServlet" class="floating-btn">
+    📋
+</a>
 </body>
 </html>

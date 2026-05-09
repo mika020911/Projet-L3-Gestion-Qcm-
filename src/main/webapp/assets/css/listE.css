@@ -1,0 +1,112 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+/* container */
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* titre */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* search form */
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+input[type="submit"] {
+    padding: 10px 15px;
+    background: #4a90e2;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: #357ab8;
+}
+
+/* table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* header */
+th {
+    background: #4a90e2;
+    color: white;
+    padding: 12px;
+}
+
+/* cells */
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* hover row */
+tr:hover {
+    background: #f1f7ff;
+}
+
+/* actions */
+a {
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* delete */
+a[href*="Delete"] {
+    background: #dc3545;
+    color: white;
+}
+
+a[href*="Delete"]:hover {
+    background: #b52a37;
+}
+
+/* update */
+a[href*="Update"] {
+    background: #28a745;
+    color: white;
+}
+
+a[href*="Update"]:hover {
+    background: #1f7a32;
+}
+
+/* empty message */
+.empty {
+    text-align: center;
+    color: gray;
+    margin-top: 20px;
+}

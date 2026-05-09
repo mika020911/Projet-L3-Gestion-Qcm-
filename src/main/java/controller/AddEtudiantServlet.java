@@ -42,18 +42,25 @@ public class AddEtudiantServlet extends HttpServlet {
 			//exe
 			
 			ps.executeUpdate();
-			// if success
-			response.sendRedirect("AjouterEtudiant.jsp");
-		 } catch (Exception e) {
-	            e.printStackTrace();
-	            response.getWriter().println("Erreur : " + e.getMessage());
-	        } finally {
-	            try {
-	                if (ps != null) ps.close();
-	                if (conn != null) conn.close();
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }
+            // ✅ SUCCESS MESSAGE
+            request.getSession().setAttribute("msg", "success");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            // ❌ ERROR MESSAGE
+            request.getSession().setAttribute("msg", "error");
+
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        response.sendRedirect("AjouterEtudiant.jsp");
 		}
 }

@@ -97,6 +97,21 @@ public class EtudiantDAO {
         return e;
     }
     
+    //------------------------login==============================
+    public boolean login(String num, String email) throws Exception {
+
+        Connection conn = utils.connectionDB.getConnection();
+
+        String sql = "SELECT * FROM etudiant WHERE num_etudiant=? AND email = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.setString(1, num);
+        ps.setString(2, email);
+
+        ResultSet rs = ps.executeQuery();
+
+        return rs.next();
+    }
     //-----------------------GetByNiveau----------------------------------------
     
     public ArrayList<model.Etudiant> getByNiveau(String niveau) throws Exception {
