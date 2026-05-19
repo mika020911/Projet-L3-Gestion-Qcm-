@@ -11,10 +11,16 @@ import model.Etudiant;
 @WebServlet("/UpdateEtudiantServlet")
 public class UpdateEtudiantServlet extends HttpServlet {
 
-    // 👉 1. GET = afficher formulaire
+    // GET : afficher le formulaire pré-rempli
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // Vérification session admin
+        if (request.getSession().getAttribute("admin") == null) {
+            response.sendRedirect("AdminPage.jsp");
+            return;
+        }
 
         String num = request.getParameter("num_etudiant");
 
@@ -28,17 +34,15 @@ public class UpdateEtudiantServlet extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
     }
 
-    // 👉 2. POST = faire update
+    // POST : effectuer la mise à jour
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
             Etudiant e = new Etudiant();
-
             e.setNum(request.getParameter("num_etudiant"));
             e.setNom(request.getParameter("nom"));
             e.setPrenom(request.getParameter("prenom"));

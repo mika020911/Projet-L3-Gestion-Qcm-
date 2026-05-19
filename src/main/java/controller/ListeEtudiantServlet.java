@@ -16,17 +16,21 @@ public class ListeEtudiantServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String motCle = request.getParameter("motCle");
+        // Vérification session admin
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            response.sendRedirect("AdminPage.jsp");
+            return;
+        }
 
+        String motCle = request.getParameter("motCle");
         ArrayList<Etudiant> list = new ArrayList<>();
 
         try {
             EtudiantDAO dao = new EtudiantDAO();
 
-            System.out.println("motCle = [" + motCle + "]");
-
             if (motCle != null && !motCle.trim().isEmpty()) {
-            	list = dao.search(motCle);
+                list = dao.search(motCle);
             } else {
                 list = dao.getAll();
             }

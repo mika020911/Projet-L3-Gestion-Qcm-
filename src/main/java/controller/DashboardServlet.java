@@ -13,23 +13,22 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // Vérification session admin
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            response.sendRedirect("AdminPage.jsp");
+            return;
+        }
+
         try {
             EtudiantDAO dao = new EtudiantDAO();
 
-            int total = dao.countAll();
-            int l1 = dao.countByNiveau("L1");
-            int l2 = dao.countByNiveau("L2");
-            int l3 = dao.countByNiveau("L3");
-            int m1 = dao.countByNiveau("M1");
-            int m2 = dao.countByNiveau("M2");
-            
-
-            request.setAttribute("total", total);
-            request.setAttribute("l1", l1);
-            request.setAttribute("l2", l2);
-            request.setAttribute("l3", l3);
-            request.setAttribute("m1", m1);
-            request.setAttribute("m2", m2);
+            request.setAttribute("total", dao.countAll());
+            request.setAttribute("l1",    dao.countByNiveau("L1"));
+            request.setAttribute("l2",    dao.countByNiveau("L2"));
+            request.setAttribute("l3",    dao.countByNiveau("L3"));
+            request.setAttribute("m1",    dao.countByNiveau("M1"));
+            request.setAttribute("m2",    dao.countByNiveau("M2"));
 
             request.getRequestDispatcher("Dashboard.jsp").forward(request, response);
 

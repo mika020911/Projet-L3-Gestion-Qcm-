@@ -1,73 +1,139 @@
-@charset "UTF-8";
+/* ============================================================
+   LOGIN.CSS — Pages de connexion Admin & Étudiant
+   ============================================================ */
+
+@import url('global.css');
+
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4a90e2, #6a11cb);
-    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 0;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    /* Fond avec dégradé subtil */
+    background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,110,247,0.18) 0%, transparent 70%),
+        var(--bg);
 }
 
-/* card login */
-.login-container {
-    background: white;
-    padding: 35px;
-    border-radius: 15px;
-    width: 320px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+/* ── Carte de login ── */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    animation: fadeUp 0.5s ease;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+
+.login-logo {
     text-align: center;
-    animation: fadeIn 0.5s ease;
+    margin-bottom: 32px;
+}
+.login-logo .icon-wrap {
+    width: 56px; height: 56px;
+    background: rgba(79,110,247,0.12);
+    border: 1px solid rgba(79,110,247,0.3);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 16px;
+}
+.login-logo h1 {
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+.login-logo p {
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
-/* titre */
-.login-container h1 {
-    margin-bottom: 20px;
-    font-size: 22px;
+/* ── Formulaire ── */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* input */
-input[type="text"],
-input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0 15px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-input:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74,144,226,0.4);
+.login-form input {
+    height: 46px;
+    font-size: 15px;
 }
 
-/* bouton */
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background: #4a90e2;
-    color: white;
+.login-form button[type="submit"] {
+    height: 46px;
+    background: var(--accent);
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
+    transition: all var(--transition);
+    margin-top: 4px;
+}
+.login-form button[type="submit"]:hover {
+    background: var(--accent-light);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--accent-glow);
 }
 
-input[type="submit"]:hover {
-    background: #357ab8;
+/* ── Message d'erreur ── */
+.login-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--error);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    animation: fadeUp 0.3s ease;
 }
 
-/* animation */
-@keyframes fadeIn {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+/* ── Lien de bas de page ── */
+.login-footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+.login-footer a {
+    color: var(--accent-light);
+    font-weight: 600;
+}
+
+/* ── Lien admin flottant ── */
+.admin-link {
+    position: fixed;
+    top: 20px; right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+.admin-link:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
 }

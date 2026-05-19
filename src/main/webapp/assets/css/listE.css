@@ -1,112 +1,125 @@
-@charset "UTF-8";
+/* ============================================================
+   LISTE.CSS — Liste Étudiants & QCM (partagé)
+   ============================================================ */
+
+@import url('global.css');
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    margin: 0;
-    padding: 20px;
+    padding: 40px 20px;
+    background:
+        radial-gradient(ellipse 70% 50% at 30% 80%, rgba(79,110,247,0.06) 0%, transparent 60%),
+        var(--bg);
 }
 
-/* container */
-.container {
-    max-width: 1000px;
-    margin: auto;
+/* ── Conteneur ── */
+.list-page {
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-/* titre */
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
+/* ── Toolbar ── */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    animation: fadeUp 0.3s ease;
 }
 
-/* search form */
-form {
-    text-align: center;
-    margin-bottom: 20px;
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    min-width: 200px;
+    max-width: 340px;
 }
-
-input[type="text"] {
-    padding: 10px;
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
+.search-box input {
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    border-right: none;
+    height: 40px;
 }
-
-input[type="submit"] {
-    padding: 10px 15px;
-    background: #4a90e2;
+.search-box button {
+    height: 40px;
+    padding: 0 16px;
+    background: var(--accent);
+    color: #fff;
     border: none;
-    color: white;
-    border-radius: 8px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     cursor: pointer;
-    margin-left: 5px;
-    transition: 0.3s;
-}
-
-input[type="submit"]:hover {
-    background: #357ab8;
-}
-
-/* table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-/* header */
-th {
-    background: #4a90e2;
-    color: white;
-    padding: 12px;
-}
-
-/* cells */
-td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-}
-
-/* hover row */
-tr:hover {
-    background: #f1f7ff;
-}
-
-/* actions */
-a {
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 6px;
     font-size: 14px;
+    font-family: var(--font-main);
+    font-weight: 600;
+    transition: background var(--transition);
+    white-space: nowrap;
+}
+.search-box button:hover { background: var(--accent-light); }
+
+/* Filtres select */
+.filter-select {
+    height: 40px;
+    width: auto;
+    min-width: 150px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
 }
 
-/* delete */
-a[href*="Delete"] {
-    background: #dc3545;
-    color: white;
+/* ── Table wrapper ── */
+.table-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    animation: fadeUp 0.4s 0.05s ease both;
 }
 
-a[href*="Delete"]:hover {
-    background: #b52a37;
+/* Actions dans tableau */
+.action-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    text-decoration: none;
+    transition: all var(--transition);
+    border: 1px solid transparent;
+}
+.action-btn.edit {
+    background: rgba(79,110,247,0.1);
+    color: var(--accent-light);
+    border-color: rgba(79,110,247,0.2);
+}
+.action-btn.edit:hover {
+    background: var(--accent);
+    color: #fff;
+}
+.action-btn.delete {
+    background: rgba(239,68,68,0.1);
+    color: var(--error);
+    border-color: rgba(239,68,68,0.2);
+}
+.action-btn.delete:hover {
+    background: var(--error);
+    color: #fff;
 }
 
-/* update */
-a[href*="Update"] {
-    background: #28a745;
-    color: white;
+/* Compteur résultats */
+.result-count {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-left: auto;
+    white-space: nowrap;
 }
 
-a[href*="Update"]:hover {
-    background: #1f7a32;
-}
-
-/* empty message */
-.empty {
-    text-align: center;
-    color: gray;
-    margin-top: 20px;
+@media (max-width: 768px) {
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .search-box { max-width: 100%; }
+    .table-wrapper { overflow-x: auto; }
 }

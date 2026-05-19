@@ -1,75 +1,96 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+if (session.getAttribute("admin") == null) {
+    response.sendRedirect("AdminPage.jsp"); return;
+}
+%>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Dashboard Admin</title>
-<link rel="stylesheet" type="text/css" href="assets\css\style.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="assets/js/dashboard.js"></script>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Admin</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
-<!-- Bouton menu -->
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<!-- Sidebar -->
-<div id="sidebar" class="sidebar">
-    <h2>Admin Panel</h2>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <a href="DashboardServlet">📊 Dashboard</a>
-    <a href="ListeEtudiantServlet">👨‍🎓 Étudiants</a>
-    <a href= "ListeQcmServlet">Gestion QCM</a>
-    
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <h2>🎓 ExamPro</h2>
+            <span>Panneau d'administration</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="DashboardServlet" class="active"><span class="icon">📊</span> Dashboard</a>
+            <a href="ListeEtudiantServlet"><span class="icon">👨‍🎓</span> Étudiants</a>
+            <a href="AjouterEtudiant.jsp"><span class="icon">➕</span> Ajouter étudiant</a>
+            <a href="ListeQcmServlet"><span class="icon">📝</span> Gestion QCM</a>
+            <a href="AjouterQcm.jsp"><span class="icon">➕</span> Ajouter QCM</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="LogoutServlet">🚪 Déconnexion</a>
+        </div>
+    </aside>
+
+    <!-- Contenu -->
+    <main class="main-content">
+
+        <div class="page-header fade-up">
+            <div>
+                <h1>Tableau de bord</h1>
+                <p>Vue d'ensemble des étudiants par niveau</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card fade-up">
+                <div class="label">Total étudiants</div>
+                <div class="value"><%= request.getAttribute("total") %></div>
+            </div>
+            <div class="stat-card l1 fade-up fade-up-delay-1">
+                <div class="label">Licence 1</div>
+                <div class="value"><%= request.getAttribute("l1") %></div>
+            </div>
+            <div class="stat-card l2 fade-up fade-up-delay-2">
+                <div class="label">Licence 2</div>
+                <div class="value"><%= request.getAttribute("l2") %></div>
+            </div>
+            <div class="stat-card l3 fade-up fade-up-delay-3">
+                <div class="label">Licence 3</div>
+                <div class="value"><%= request.getAttribute("l3") %></div>
+            </div>
+            <div class="stat-card m1 fade-up fade-up-delay-4">
+                <div class="label">Master 1</div>
+                <div class="value"><%= request.getAttribute("m1") %></div>
+            </div>
+            <div class="stat-card m2 fade-up fade-up-delay-4">
+                <div class="label">Master 2</div>
+                <div class="value"><%= request.getAttribute("m2") %></div>
+            </div>
+        </div>
+
+        <!-- Graphique -->
+        <div class="chart-wrapper">
+            <h3>Répartition par niveau</h3>
+            <canvas id="niveauChart" style="height:260px;"
+                data-l1="<%= request.getAttribute("l1") %>"
+                data-l2="<%= request.getAttribute("l2") %>"
+                data-l3="<%= request.getAttribute("l3") %>"
+                data-m1="<%= request.getAttribute("m1") %>"
+                data-m2="<%= request.getAttribute("m2") %>">
+            </canvas>
+        </div>
+
+    </main>
 </div>
 
-<h1>📊 Dashboard Admin</h1>
-
-<div class="card"><h2>Total</h2><h3><%= request.getAttribute("total") %></h3></div>
-<div class="card"><h2>L1</h2><h3><%= request.getAttribute("l1") %></h3></div>
-<div class="card"><h2>L2</h2><h3><%= request.getAttribute("l2") %></h3></div>
-<div class="card"><h2>L3</h2><h3><%= request.getAttribute("l3") %></h3></div>
-<div class="card"><h2>M1</h2><h3><%= request.getAttribute("m1") %></h3></div>
-<div class="card"><h2>M2</h2><h3><%= request.getAttribute("m2") %></h3></div>
-
-<br><br>
-
-<div style="width: 450px; height: 300px;">
-    <canvas id="niveauChart"></canvas>
-</div>
-
-<script>
-const ctx = document.getElementById('niveauChart');
-
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['L1', 'L2', 'L3', 'M1', 'M2'],
-        datasets: [{
-            label: 'Étudiants',
-            data: [
-                <%= request.getAttribute("l1") %>,
-                <%= request.getAttribute("l2") %>,
-                <%= request.getAttribute("l3") %>,
-                <%= request.getAttribute("m1") %>,
-                <%= request.getAttribute("m2") %>
-            ],
-            backgroundColor: ['blue', 'green', 'orange', 'purple', 'red']
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
-</script>
-
-<br>
-
-<a href="ListeEtudiantServlet">Voir la liste des étudiants</a>
-
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
 </body>
 </html>

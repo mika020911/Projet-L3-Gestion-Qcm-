@@ -4,19 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen — Connexion Étudiant</title>
+    <title>Admin — Connexion</title>
     <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
 
-<a href="AdminPage.jsp" class="admin-link">🔐 Admin</a>
-
 <div class="login-card">
 
     <div class="login-logo">
-        <div class="icon-wrap">📝</div>
-        <h1>Espace Étudiant</h1>
-        <p>Connectez-vous avec votre numéro et email pour passer l'examen</p>
+        <div class="icon-wrap">🎓</div>
+        <h1>Espace Admin</h1>
+        <p>Connectez-vous pour accéder au tableau de bord</p>
     </div>
 
     <%
@@ -27,17 +25,21 @@
     <div class="login-error">⚠️ <%= loginError %></div>
     <% } %>
 
-    <form class="login-form" action="loginEtudiantServlet" method="post">
+    <form class="login-form" action="LoginAdminServlet" method="post">
         <div class="form-group">
-            <label>Numéro étudiant</label>
-            <input type="text" name="num_etudiant" placeholder="ex: ETU001" required autofocus>
+            <label>Code Admin</label>
+            <input type="text" name="code_admin" placeholder="Admin01" required autofocus>
         </div>
         <div class="form-group">
-            <label>Adresse email</label>
-            <input type="email" name="email" placeholder="votre@email.com" required>
+            <label>Mot de passe</label>
+            <input type="password" name="mdp" placeholder="••••••••" required>
         </div>
-        <button type="submit">Commencer l'examen →</button>
+        <button type="submit">Se connecter</button>
     </form>
+
+    <div class="login-footer">
+        Vous êtes étudiant ? <a href="loginEtudiant.jsp">Accéder à l'examen →</a>
+    </div>
 
 </div>
 
