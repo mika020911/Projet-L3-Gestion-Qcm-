@@ -18,6 +18,19 @@ int count = (list != null) ? list.size() : 0;
 </head>
 <body>
 
+<%-- Toast après suppression --%>
+<%
+String msg       = (String) session.getAttribute("msg");
+String msgDetail = (String) session.getAttribute("msgDetail");
+if (msg != null)       session.removeAttribute("msg");
+if (msgDetail != null) session.removeAttribute("msgDetail");
+%>
+<% if (msg != null) { %>
+<div class="toast <%= msg %>">
+    <%= msgDetail != null ? msgDetail : (msg.equals("success") ? "✅ Suppression réussie." : "❌ Erreur.") %>
+</div>
+<% } %>
+
 <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
 <div class="layout">
@@ -32,6 +45,8 @@ int count = (list != null) ? list.size() : 0;
             <a href="AjouterEtudiant.jsp"><span class="icon">➕</span> Ajouter étudiant</a>
             <a href="ListeQcmServlet"><span class="icon">📝</span> Gestion QCM</a>
             <a href="AjouterQcm.jsp"><span class="icon">➕</span> Ajouter QCM</a>
+            <a href="NotesServlet"><span class="icon">📋</span> Notes</a>
+            <a href="ClassementServlet"><span class="icon">🏆</span> Classement</a>
         </nav>
         <div class="sidebar-footer">
             <a href="LogoutServlet">🚪 Déconnexion</a>

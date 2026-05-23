@@ -81,8 +81,6 @@ public class CorrectionServlet extends HttpServlet {
                 "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Examen terminé</title></head><body>"
                 + "<h1>✅ Examen terminé !</h1>"
                 + "<p>Bonjour <b>" + etu.getNom() + " " + etu.getPrenom() + "</b>,</p>"
-                + "<p>Votre score : <b>" + score + " / " + total + "</b></p>"
-                + "<p>Votre note  : <b>" + note + " / 10</b></p>"
                 + "<p>📧 Un email de résultat a été envoyé à : <b>" + etu.getEmail() + "</b></p>"
                 + "<br><a href='loginEtudiant.jsp'>🔙 Retour à l'accueil</a>"
                 + "</body></html>"

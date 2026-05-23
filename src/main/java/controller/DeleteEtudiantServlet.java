@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.EtudiantDAO;
+import DAO.ExamenDAO;
 
 @WebServlet("/DeleteEtudiantServlet")
 public class DeleteEtudiantServlet extends HttpServlet {
@@ -21,13 +22,33 @@ public class DeleteEtudiantServlet extends HttpServlet {
 
         String num = request.getParameter("num_etudiant");
 
-        try {
-            EtudiantDAO dao = new EtudiantDAO();
-            dao.delete(num);
+        // Vérifier que le paramètre n'est pas vide
+        if (num == null || num.trim().isEmpty()) {
+            session.setAttribute("msg", "error");
+            session.setAttribute("msgDetail", "Numéro étudiant manquant.");
             response.sendRedirect("ListeEtudiantServlet");
+            return;
+        }
+
+        try {
+            // ÉTAPE 1 : supprimer d'abord les examens liés à cet étudiant
+            // (évite l'erreur de clé étrangère FK)
+            ExamenDAO examenDao = new ExamenDAO();
+            examenDao.deleteByEtudiant(num.trim());
+
+            // ÉTAPE 2 : supprimer l'étudiant
+            EtudiantDAO etudiantDao = new EtudiantDAO();
+            etudiantDao.delete(num.trim());
+
+            session.setAttribute("msg", "success");
+            session.setAttribute("msgDetail", "Étudiant " + num + " supprimé avec succès.");
 
         } catch (Exception e) {
             e.printStackTrace();
+            session.setAttribute("msg", "error");
+            session.setAttribute("msgDetail", "Erreur lors de la suppression : " + e.getMessage());
         }
+
+        response.sendRedirect("ListeEtudiantServlet");
     }
 }
