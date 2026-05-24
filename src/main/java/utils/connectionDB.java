@@ -17,6 +17,8 @@ public class connectionDB {
             user = "root";
             password = "1234";
         }
+        System.out.println("=== DB_URL utilisée : " + url);
+    System.out.println("=== DB_USER utilisé : " + user);
 
         Class.forName("com.mysql.cj.jdbc.Driver");
 
